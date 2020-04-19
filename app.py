@@ -21,48 +21,6 @@ app.config.suppress_callback_exceptions = True
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("data").resolve()
 
-# Read data
-df = pd.read_csv(DATA_PATH.joinpath("clinical_analytics.csv"))
-
-clinic_list = df["Clinic Name"].unique()
-df["Admit Source"] = df["Admit Source"].fillna("Not Identified")
-admit_list = df["Admit Source"].unique().tolist()
-
-# Date
-# Format checkin Time
-df["Check-In Time"] = df["Check-In Time"].apply(
-    lambda x: dt.strptime(x, "%Y-%m-%d %I:%M:%S %p")
-)  # String -> Datetime
-
-# Insert weekday and hour of checkin time
-df["Days of Wk"] = df["Check-In Hour"] = df["Check-In Time"]
-df["Days of Wk"] = df["Days of Wk"].apply(
-    lambda x: dt.strftime(x, "%A")
-)  # Datetime -> weekday string
-
-df["Check-In Hour"] = df["Check-In Hour"].apply(
-    lambda x: dt.strftime(x, "%I %p")
-)  # Datetime -> int(hour) + AM/PM
-
-day_list = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-]
-
-check_in_duration = df["Check-In Time"].describe()
-
-# Register all departments for callbacks
-all_departments = df["Department"].unique().tolist()
-wait_time_inputs = [
-    Input((i + "_wait_time_graph"), "selectedData") for i in all_departments
-]
-score_inputs = [Input((i + "_score_graph"), "selectedData") for i in all_departments]
-
 
 def description_card():
     """
