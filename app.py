@@ -59,7 +59,6 @@ def generate_table_row(id, style, col1, col2, col3):
         ],
     )
 
-
 app.layout = html.Div(
     id="app-container",
     children=[
