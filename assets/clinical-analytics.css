@@ -45,16 +45,8 @@ H5, H3 {
     font-family: Acumin, "Helvetica Neue", sans-serif;
 }
 
-#left-column {
-    margin-top: 20px;
-    padding: 0rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: calc(100vh - 5.5rem);
-}
 
-#right-column {
+#main-column {
     background-color: #f4f4f4;
     padding: 0rem 2rem;
     min-height: calc(100vh - 5.5rem);
@@ -66,10 +58,6 @@ H5, H3 {
     font-size: 13px;
 }
 
-.wait_time_graph > div, .patient_score_graph > div {
-    height: 100% !important;
-    width: 100% !important;
-}
 
 .draglayer {
     cursor: pointer !important;
@@ -150,12 +138,12 @@ H5, H3 {
         margin: 10px 0px;
     }
 
-    #left-column, #right-column {
+    #main-column {
         width: 100%;
         margin-left: 0px;
     }
 
-    #right-column {
+    #main-column {
         padding: 0rem 0.5rem;
     }
 
